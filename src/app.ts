@@ -9,9 +9,10 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 import { handleError } from './helpers/error';
 import httpLogger from './middlewares/httpLogger';
 import router from './routes/index';
-import accountRouter from './routes/account.router'
+import accountRouter from './routes/account.router';
+import swaggerDoc from './swagger';
 
-const app: express.Application = express();
+const app = express();
 
 app.use(httpLogger);
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.use('/', router);
 app.use('/account', accountRouter);
+swaggerDoc(app, '8000');
 
 // catch 404 and forward to error handler
 app.use((_req, _res, next) => {
