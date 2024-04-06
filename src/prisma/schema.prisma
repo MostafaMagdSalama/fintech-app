@@ -12,10 +12,10 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 enum TransactionType {
   DEPOSIT
   WITHDRAW
-
 }
 
 model User {
@@ -28,22 +28,18 @@ model User {
 }
 
 model Account {
-  id      String @id @default(uuid())
-  balance Int @default(0)
-  userId  String
-  user    User   @relation(fields: [userId], references: [id])
+  id          String        @id @default(uuid())
+  balance     Int           @default(0)
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
   Transaction Transaction[]
 }
 
 model Transaction {
-  id          String          @id @default(uuid())
-  amount      Int
-  type        TransactionType
-  accountId   String
-  account     Account         @relation(fields: [accountId], references: [id])
-  createdAt   DateTime        @default(now())
+  id        String          @id @default(uuid())
+  amount    Int
+  type      TransactionType
+  accountId String
+  account   Account         @relation(fields: [accountId], references: [id])
+  createdAt DateTime        @default(now())
 }
-
-
-
-
