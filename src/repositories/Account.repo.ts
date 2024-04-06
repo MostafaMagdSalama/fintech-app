@@ -16,7 +16,7 @@ export const openAccount = async ({ userId }: Pick<Account, 'userId'>) => {
 
 // impelemet withdraw functionality in transaction statment so if the withdraw is successful, the transaction is logged
 export const withdraw = async ({ accountId, amount }: { accountId: string; amount: number }) => {
-  prisma.$transaction(async (tx) => {
+  const transaction = await prisma.$transaction(async (tx) => {
     const account = await tx.account.update({
       where: { id: accountId },
       data: {
@@ -37,11 +37,13 @@ export const withdraw = async ({ accountId, amount }: { accountId: string; amoun
         accountId,
       },
     });
+    return transactionLog;
   });
+  return transaction.id;
 };
 // impelement deposit functionality in transaction statment so if the deposit is successful, the transaction is logged
 export const deposit = async ({ accountId, amount }: { accountId: string; amount: number }) => {
-  prisma.$transaction(async (tx) => {
+  const transaction = await prisma.$transaction(async (tx) => {
     const account = await tx.account.update({
       where: { id: accountId },
       data: {
@@ -51,15 +53,16 @@ export const deposit = async ({ accountId, amount }: { accountId: string; amount
       },
     });
     // we can check if the amout to exceed the limit if there is any limit
-
-    await tx.transaction.create({
+    const transactionLog = await tx.transaction.create({
       data: {
         amount,
         type: 'DEPOSIT',
         accountId,
       },
     });
+    return transactionLog;
   });
+  return transaction.id;
 };
 
 export const getAccountById = async (id: string) => {
