@@ -9,6 +9,7 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 import { handleError } from './helpers/error';
 import httpLogger from './middlewares/httpLogger';
 import router from './routes/index';
+import accountRouter from './routes/account.router'
 
 const app: express.Application = express();
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', router);
+app.use('/account', accountRouter);
 
 // catch 404 and forward to error handler
 app.use((_req, _res, next) => {
