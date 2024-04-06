@@ -1,28 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
-    "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "moduleResolution": "node",
-    "removeComments": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "baseUrl": ".",
+    "target": "es2017", // Adjust based on your Node.js version and target environment
+    "lib": ["dom", "dom.iterable", "esnext"], // Include necessary standard libraries
+    "allowJs": true, // Allow integration with existing JavaScript code
+    "skipLibCheck": true, // Skip type checking for built-in library files (if applicable)
+    "strict": true, // Enable strict type checking for better error detection
+    "noImplicitAny": true, // Disallow implicit `any` type assignments
+    "esModuleInterop": true, // Allow for seamless module resolution between CommonJS and ES modules
+    "module": "commonjs", // Specify module type (commonjs for Node.js projects)
+    "outDir": "dist", // Output directory for compiled JavaScript files (optional)
+    "sourceMap": true, // Generate source maps for debugging (optional)
+    "declaration": false, // Don't generate type declaration files (unless publishing a library)
+    "forceConsistentCasingInFileNames": true, // Enforce consistent file name casing
+    "resolveJsonModule": true, // Allow importing JSON files as modules
+    "isolatedModules": true, // Treat each file as a separate module by default
+    "experimentalDecorators": true, // Allow use of experimental decorators (if needed)
+    "baseUrl": "./src", // Base directory for resolving non-absolute module paths (optional)
+    "paths": { // Map custom module paths (optional)
+      "@types/*": ["node_modules/@types/*"]
+    }
   },
-  "exclude": ["node_modules"],
-  "include": ["./src/**/*.ts"]
+  "include": ["src"], // Include source files for compilation
+  "exclude": ["node_modules"] // Exclude node_modules from compilation
 }
