@@ -6,7 +6,7 @@ import validateRequestSchema from '../middlewares/validationRequestSchema.middle
 const app = express();
 const router = express.Router();
 app.use(express.json());
-/* GET home page. */
+
 router.get('/', healthCheck);
 /**
  *

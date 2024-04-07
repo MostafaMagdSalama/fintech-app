@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import http from 'http';
 import { handleError } from './helpers/error';
 import httpLogger from './middlewares/httpLogger';
-import router from './routes/index';
+import UserRouter from './routes/user.router';
 import accountRouter from './routes/account.router';
 import swaggerDoc from './swagger';
 
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', router);
+app.use('/', UserRouter);
 app.use('/account', accountRouter);
 swaggerDoc(app, '8000');
 
