@@ -116,7 +116,7 @@ router.put('/update', updateUserSchema, validateRequestSchema, authenticateToken
 /**
  *
  * @openapi
- * /update/{id}:
+ * /{id}:
  *  delete:
  *   tags:
  *    - Users
@@ -137,7 +137,7 @@ router.put('/update', updateUserSchema, validateRequestSchema, authenticateToken
  *
  */
 
-router.delete('/delete/:id', deleteUserSchema, validateRequestSchema, authenticateToken, deleteUserController);
+router.delete('/:id', deleteUserSchema, validateRequestSchema, authenticateToken, deleteUserController);
 /**
  *
  * @openapi

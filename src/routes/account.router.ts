@@ -79,7 +79,7 @@ router.post('/withdraw', AuthMiddleware, withdrawValidation, validateRequestSche
 
 /**
  *  @openapi
- * /account/getAccountById/{id}:
+ * /account/{id}:
  *  get:
  *   tags:
  *    - Account
@@ -100,11 +100,11 @@ router.post('/withdraw', AuthMiddleware, withdrawValidation, validateRequestSche
  *
  *
  */
-router.get('/getAccountById/:id', AuthMiddleware, getAccountByIdController);
+router.get('/:id', AuthMiddleware, getAccountByIdController);
 
 /**
  *  @openapi
- * /account/deleteAccount/{id}:
+ * /account/{id}:
  *  delete:
  *   tags:
  *    - Account
@@ -124,6 +124,6 @@ router.get('/getAccountById/:id', AuthMiddleware, getAccountByIdController);
  *      description: Missing or invalid attributes in request.
  */
 
-router.delete('/deleteAccount/:id', AuthMiddleware, getAccountByIdController);
+router.delete('/:id', AuthMiddleware, getAccountByIdController);
 
 export default router;
