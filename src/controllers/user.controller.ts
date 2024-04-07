@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'; // Import the necessary types
-import { createUser, deleteUser, findUserByEmail, updateUser } from '../repositories/User.repo';
+import { createUser, deleteUser, findUserByEmail, getUserAccountByUserId, updateUser } from '../repositories/User.repo';
 import { hashPassword } from '../helpers/utils';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
@@ -71,3 +71,14 @@ export const deleteUserController = async (req: Request & { user: { id: string }
     res.status(400).json({ error: 'something went wrong in user delete' });
   }
 };
+
+
+
+export const getUserAccountByUserIdController = async (req: Request & { user: { id: string } }, res: Response) => {
+  try {
+    const accounts = await getUserAccountByUserId(req.user.id);
+    res.status(200).json(accounts);
+  } catch (error) {
+    res.status(400).json({ error: 'something went wrong in user delete' });
+  }
+}

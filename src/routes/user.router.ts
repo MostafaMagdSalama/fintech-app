@@ -1,6 +1,12 @@
 import express from 'express';
 import { healthCheck } from '../handlers/healthcheck';
-import { UpdateUserController, createUserController, deleteUserController, loginController } from '../controllers/user.controller';
+import {
+  UpdateUserController,
+  createUserController,
+  deleteUserController,
+  getUserAccountByUserIdController,
+  loginController,
+} from '../controllers/user.controller';
 import { createUserSchema, deleteUserSchema, loginSchema, updateUserSchema } from '../validationSchemas/userValidation';
 import validateRequestSchema from '../middlewares/validationRequestSchema.middleware';
 import authenticateToken from '../middlewares/auth.middleware';
@@ -130,5 +136,22 @@ router.put('/update', updateUserSchema, validateRequestSchema, authenticateToken
  */
 
 router.delete('/delete/:id', deleteUserSchema, validateRequestSchema, authenticateToken, deleteUserController);
+/**
+ *
+ * @openapi
+ * /getAccounts:
+ *  get:
+ *   tags:
+ *    - Users
+ *   description: get user accounts by id
+ *   responses:
+ *    200:
+ *      description: A successful response (user deleted successfully)
+ *    400:
+ *      description: Bad request
+ *
+ */
+
+router.get('/getAccounts', authenticateToken, getUserAccountByUserIdController);
 
 export default router;
