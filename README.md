@@ -198,4 +198,4 @@ on the browserm swagger ui will open with api documention
 
 > http://localhost:8000/docs/
 
-![image](https://github.com/MostafaMagdSalama/fintech-app/assets/37047996/c446c7ae-ec05-40cc-a180-071e6a6c45e7)
+![image](https://github.com/MostafaMagdSalama/fintech-app/assets/37047996/486d74dc-0dba-41b2-84d0-296a57096d30)
