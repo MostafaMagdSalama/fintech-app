@@ -192,6 +192,10 @@ on the browserm swagger ui will open with api documention
 - **Note: duplicated**
   **This endpoint allows updating a user's balance by performing a secure two-step process within a database transaction. It takes the account ID and update amount as input. Within the transaction, it first adds a record to the transaction table logging the change, and then updates the user's balance in the account table. This transactional approach ensures data integrity by guaranteeing that both actions succeed or both fail, preventing inconsistencies in the database.**
 - **Note:**
-**This service works, but it might have issues if many users try to do the same thing at once. To avoid problems, a future update could add a queuing system for requests. This would ensure everything happens in order, preventing race condition.**
+  **This service works, but it might have issues if many users try to do the same thing at once. To avoid problems, a future update could add a queuing system for requests. This would ensure everything happens in order, preventing race condition.**
 
- 
+### Documenting the remaining API endpoints in Swagger
+
+> http://localhost:8000/docs/
+
+![image](https://github.com/MostafaMagdSalama/fintech-app/assets/37047996/c446c7ae-ec05-40cc-a180-071e6a6c45e7)
