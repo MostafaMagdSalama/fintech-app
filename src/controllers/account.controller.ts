@@ -7,7 +7,6 @@ export const openAccountController = async (req: Request & { user: User }, res: 
   try {
     const { id: userId } = req.user;
     const account = await openAccount({ userId });
-    console.log({ account: account });
     res.status(201).json(account);
   } catch (error) {
     res.status(400).json({ error: 'Account creation failed' });

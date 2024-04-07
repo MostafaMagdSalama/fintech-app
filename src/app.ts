@@ -4,17 +4,15 @@ import path from 'path';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import http from 'http';
-
-dotenv.config({ path: path.join(__dirname, '../.env') });
 import { handleError } from './helpers/error';
 import httpLogger from './middlewares/httpLogger';
 import router from './routes/index';
 import accountRouter from './routes/account.router';
 import swaggerDoc from './swagger';
-import e from 'express';
 
 const app = express();
-export default app;
+
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 app.use(httpLogger);
 app.use(express.json());
@@ -68,3 +66,5 @@ function onListening() {
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+export default app;
