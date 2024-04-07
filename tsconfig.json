@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"], // Include necessary standard libraries
     "allowJs": true, // Allow integration with existing JavaScript code
     "skipLibCheck": true, // Skip type checking for built-in library files (if applicable)
-    "strict": true, // Enable strict type checking for better error detection
+    "strict": false, // Enable strict type checking for better error detection
     "noImplicitAny": true, // Disallow implicit `any` type assignments
     "esModuleInterop": true, // Allow for seamless module resolution between CommonJS and ES modules
     "module": "commonjs", // Specify module type (commonjs for Node.js projects)

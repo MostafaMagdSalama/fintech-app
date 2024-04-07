@@ -11,8 +11,10 @@ import httpLogger from './middlewares/httpLogger';
 import router from './routes/index';
 import accountRouter from './routes/account.router';
 import swaggerDoc from './swagger';
+import e from 'express';
 
 const app = express();
+export default app;
 
 app.use(httpLogger);
 app.use(express.json());
