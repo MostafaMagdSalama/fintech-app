@@ -69,3 +69,8 @@ export const getAccountById = async (id: string) => {
   const account = await prisma.account.findFirst({ where: { id } });
   return account;
 };
+
+export const deleteAccountById = async (id: string) => {
+  const account = await prisma.account.delete({ where: { id } });
+  return account;
+}

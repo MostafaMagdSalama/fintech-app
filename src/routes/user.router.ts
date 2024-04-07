@@ -132,6 +132,8 @@ router.put('/update', updateUserSchema, validateRequestSchema, authenticateToken
  *      description: A successful response (user deleted successfully)
  *    400:
  *      description: Bad request
+ *    401:
+ *      description: unAuthorized to access resource
  *
  */
 

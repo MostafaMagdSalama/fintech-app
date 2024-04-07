@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { deposit, getAccountById, openAccount, withdraw } from '../repositories/Account.repo';
+import { deleteAccountById, deposit, getAccountById, openAccount, withdraw } from '../repositories/Account.repo';
 import { User } from '@prisma/client';
 
 export const openAccountController = async (req: Request & { user: User }, res: Response) => {
@@ -58,5 +58,39 @@ export const widthdrawController = async (req: Request & { user: User }, res: Re
     return res.status(201).json({ message: 'withdraw successful' });
   } catch (error) {
     return res.status(400).json({ error: 'Withdraw failed' });
+  }
+};
+
+export const getAccountByIdController = async (req: Request & { user: User }, res: Response) => {
+  const { id } = req.params;
+  try {
+    if (id !== req.user.id) {
+      return res.status(401).json({ error: 'unauthorized' });
+    }
+    const account = await getAccountById(id);
+    if (!account) {
+      return res.status(400).json({ error: 'Invalid account id' });
+    }
+
+    return res.status(200).json(account);
+  } catch (error) {
+    return res.status(400).json({ error: 'Account not found' });
+  }
+};
+
+export const deleteAccountController = async (req: Request & { user: User }, res: Response) => {
+  const { id } = req.params;
+  try {
+    if (id !== req.user.id) {
+      return res.status(401).json({ error: 'unauthorized' });
+    }
+    const account = await getAccountById(id);
+    if (!account) {
+      return res.status(400).json({ error: 'Invalid account id' });
+    }
+    await deleteAccountById(id);
+    return res.status(204).json({ message: 'Account deleted successfully' });
+  } catch (error) {
+    return res.status(400).json({ error: 'Account not found' });
   }
 };

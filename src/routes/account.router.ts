@@ -1,6 +1,6 @@
 import express from 'express';
 import AuthMiddleware from '../middlewares/auth.middleware';
-import { depositController, openAccountController, widthdrawController } from '../controllers/account.controller';
+import { depositController, getAccountByIdController, openAccountController, widthdrawController } from '../controllers/account.controller';
 import { depositevalidation, withdrawValidation } from '../validationSchemas/accountValidation';
 import validateRequestSchema from '../middlewares/validationRequestSchema.middleware';
 
@@ -76,5 +76,54 @@ router.post('/deposit', AuthMiddleware, depositevalidation, validateRequestSchem
  *      description: Missing or invalid attributes in request.
  */
 router.post('/withdraw', AuthMiddleware, withdrawValidation, validateRequestSchema, widthdrawController);
+
+/**
+ *  @openapi
+ * /account/getAccountById/{id}:
+ *  get:
+ *   tags:
+ *    - Account
+ *   description: get account by id
+ *   parameters:
+ *     - in: path
+ *       name: id
+ *       required: true
+ *       schema:
+ *         type: string
+ *   responses:
+ *    200:
+ *      description: A successful response (account retrieved successfully)
+ *    400:
+ *      description: Missing or invalid attributes in request.
+ *    401:
+ *      description: unAuthorized to access resource
+ *
+ *
+ */
+router.get('/getAccountById/:id', AuthMiddleware, getAccountByIdController);
+
+/**
+ *  @openapi
+ * /account/deleteAccount/{id}:
+ *  delete:
+ *   tags:
+ *    - Account
+ *   description: delete account by id
+ *   parameters:
+ *     - in: path
+ *       name: id
+ *       required: true
+ *       schema:
+ *         type: string
+ *   responses:
+ *    204:
+ *      description: A successful response (account deleted successfully)
+ *    401:
+ *      description: unAuthorized to access resource
+ *    400:
+ *      description: Missing or invalid attributes in request.
+ */
+
+router.delete('/deleteAccount/:id', AuthMiddleware, getAccountByIdController);
 
 export default router;

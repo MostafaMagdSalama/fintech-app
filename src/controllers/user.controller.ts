@@ -72,8 +72,6 @@ export const deleteUserController = async (req: Request & { user: { id: string }
   }
 };
 
-
-
 export const getUserAccountByUserIdController = async (req: Request & { user: { id: string } }, res: Response) => {
   try {
     const accounts = await getUserAccountByUserId(req.user.id);
@@ -81,4 +79,4 @@ export const getUserAccountByUserIdController = async (req: Request & { user: { 
   } catch (error) {
     res.status(400).json({ error: 'something went wrong in user delete' });
   }
-}
+};
