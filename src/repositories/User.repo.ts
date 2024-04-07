@@ -21,3 +21,21 @@ export const createUser = async ({ email, name, password, phone }: Omit<User, 'i
         },
     });
 };
+
+
+export const updateUser = async (id: string, data: Omit<User,'id'>) => {
+    return prisma.user.update({
+        where: {
+            id,
+        },
+        data,
+    });
+}
+
+export const deleteUser = async (id: string) => {
+    return prisma.user.delete({
+        where: {
+            id,
+        },
+    });
+}

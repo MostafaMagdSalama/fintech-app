@@ -1,8 +1,9 @@
 import express from 'express';
 import { healthCheck } from '../handlers/healthcheck';
-import { createUserController, loginController } from '../controllers/user.controller';
-import { createUserSchema, loginSchema } from '../validationSchemas/userValidation';
+import { UpdateUserController, createUserController, deleteUserController, loginController } from '../controllers/user.controller';
+import { createUserSchema, deleteUserSchema, loginSchema, updateUserSchema } from '../validationSchemas/userValidation';
 import validateRequestSchema from '../middlewares/validationRequestSchema.middleware';
+import authenticateToken from '../middlewares/auth.middleware';
 const app = express();
 const router = express.Router();
 app.use(express.json());
@@ -71,5 +72,63 @@ router.post('/signup', createUserSchema, validateRequestSchema, createUserContro
  */
 
 router.post('/login', loginSchema, validateRequestSchema, loginController);
+
+/**
+ *
+ * @openapi
+ * /update:
+ *  put:
+ *   tags:
+ *    - Users
+ *   description: update user buy id
+ *   requestBody:
+ *     required: true
+ *     content:
+ *       application/json:
+ *         schema:
+ *           type: object
+ *           properties:
+ *            id:
+ *             type: string
+ *            email:
+ *               type: string
+ *            phone:
+ *              type: string
+ *            name:
+ *              type: string
+ *            password:
+ *               type: string
+ *   responses:
+ *    201:
+ *      description: A successful response (user created successfully)
+ *    400:
+ *      description: Bad request
+ *
+ */
+
+router.put('/update', updateUserSchema, validateRequestSchema, authenticateToken, UpdateUserController);
+/**
+ *
+ * @openapi
+ * /update/{id}:
+ *  delete:
+ *   tags:
+ *    - Users
+ *   description: delete user by id
+ *   parameters:
+ *     - in: path
+ *       name: id
+ *       required: true
+ *       schema:
+ *         type: string
+ *   responses:
+ *    204:
+ *      description: A successful response (user deleted successfully)
+ *    400:
+ *      description: Bad request
+ *
+ */
+
+router.delete('/delete/:id', deleteUserSchema, validateRequestSchema, authenticateToken, deleteUserController);
 
 export default router;
